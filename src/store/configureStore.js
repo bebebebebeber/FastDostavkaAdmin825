@@ -6,6 +6,7 @@ import createHistory from 'history/createHashHistory';
 ///reducers
 import {loginReducer} from '../Views/defaultViews/LoginPage/reducer.js';
 import {ordersReducer} from '../Views/moderatorViews/Home/reducer';
+import {addProductReducer} from '../Views/productViews/AddProduct/reducer.js';
 
 
 
@@ -18,6 +19,7 @@ export default function configureStore(history, initialState) {
   const reducers = {
     login: loginReducer,
     orders:ordersReducer,
+    addProduct:addProductReducer
   };
 
   const middleware = [

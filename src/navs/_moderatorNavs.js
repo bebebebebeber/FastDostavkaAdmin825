@@ -5,6 +5,11 @@ export default {
         url: '/admin',
         icon: 'fa fa-home'
       },    
+      {
+        name: 'Додати продукт',
+        url: '/admin/add-prod',
+        icon: 'fa fa-home'
+      },  
     //   {
     //     title: true,
     //     name: 'Розклад',
