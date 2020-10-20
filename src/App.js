@@ -1,8 +1,5 @@
 import React, { Suspense, Component } from 'react';
 import { Route, Switch, HashRouter as Router } from "react-router-dom";
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import Cookies from 'universal-cookie';
 import './scss/style.scss';
 
 //layouts
@@ -13,32 +10,7 @@ export default class App extends Component {
   static displayName = App.name;
 
   render() {
-    const cookies = new Cookies();
-    let themeCookies = cookies.get('theme');
-    if(themeCookies===undefined){
-      themeCookies='light';
-      cookies.set('theme', 'light', { path: '/' });
-    }
-    else if (themeCookies!="light" && themeCookies!="dark"){
-      themeCookies='light';
-      cookies.set('theme', 'light', { path: '/' });
-    }
-    themeCookies=='light'? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
-    const theme =
-      createMuiTheme({
-        palette: {
-          type: themeCookies,
-        },
-      })
-      ;
-    
-      let lang = cookies.get('lang');
-      if(lang===undefined){
-        cookies.set('lang', 'en', { path: '/' });
-      }
-      console.log(themeCookies)
-    return (
-      <ThemeProvider  theme={theme}>          
+    return (        
           <Router>  
       <Suspense fallback={ <div className="animated fadeIn pt-1 text-center">Loading...</div> }>
         <Switch>
@@ -48,7 +20,6 @@ export default class App extends Component {
         </Switch>
       </Suspense>
       </Router> 
-      </ThemeProvider>
 
     );
   }
