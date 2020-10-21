@@ -6,6 +6,11 @@ export default {
         icon: 'fa fa-home'
       },    
       {
+        name: 'Магазини',
+        url: '/admin/stores',
+        icon: 'fa fa-home'
+      }, 
+      {
         name: 'Додати продукт',
         url: '/admin/add-prod',
         icon: 'fa fa-home'
