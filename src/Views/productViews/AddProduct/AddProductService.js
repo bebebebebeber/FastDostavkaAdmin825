@@ -8,5 +8,7 @@ export default class AddProductService {
     static getStores() {
         return axios.get(`${serverUrl}api/AdminGeneral/stores`)
     };
-    
+    static sendCroppedImage(model){
+        return axios.post(`${serverUrl}api/AdminGeneral/cropped`,model);
+    };
 }

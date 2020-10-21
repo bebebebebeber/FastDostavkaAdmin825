@@ -10,9 +10,15 @@ export const PRODUCT_ADD_FAILED = "PRODUCT_ADD_FAILED";
 export const STORES_STARTED = "STORES_STARTED";
 export const STORES_SUCCESS = "STORES_SUCCESS";
 export const STORES_FAILED = "STORES_FAILED";
+
+export const CROPPED_STARTED = "CROPPED_STARTED";
+export const CROPPED_SUCCESS = "CROPPED_SUCCESS";
+export const CROPPED_FAILED = "CROPPED_FAILED";
+
 const initialState = {
   list: {
-    response:[],
+    response: "",
+    cropImg:"",
     stores: [],
     loading: true,
     success: false,
@@ -39,6 +45,7 @@ export const getStores = () => {
 };
 export const addProduct = (model) => {
   return (dispatch) => {
+    //dispatch(getListActions.started());
     AddProductService.addProduct(model)
       .then(
         (response) => {
@@ -54,6 +61,23 @@ export const addProduct = (model) => {
   };
 };
 
+export const sendCroppedImage = (model) => {
+  return (dispatch) => {
+    //dispatch(getCroppedListActions.started());
+    AddProductService.sendCroppedImage(model)
+      .then(
+        (response) => {
+          dispatch(getCroppedListActions.success(response));
+        },
+        (err) => {
+          throw err;
+        }
+      )
+      .catch((err) => {
+        dispatch(getCroppedListActions.failed(err.response.data));
+      });
+  };
+};
 
 export const getStoresListActions = {
   started: () => {
@@ -76,26 +100,43 @@ export const getStoresListActions = {
   },
 };
 export const getListActions = {
-    started: () => {
-      return {
-        type: PRODUCT_ADD_STARTED,
-      };
-    },
-    success: (response) => {
-      return {
-        type: PRODUCT_ADD_SUCCESS,
-        //response: response.data,
-      };
-    },
-  
-    failed: (error) => {
-      return {
-        type: PRODUCT_ADD_FAILED,
-        errors: error,
-      };
-    },
-  };
-  
+  started: () => {
+    return {
+      type: PRODUCT_ADD_STARTED,
+    };
+  },
+  success: (response) => {
+    return {
+      type: PRODUCT_ADD_SUCCESS,
+      //response: response.data,
+    };
+  },
+  failed: (error) => {
+    return {
+      type: PRODUCT_ADD_FAILED,
+      errors: error,
+    };
+  },
+};
+export const getCroppedListActions = {
+  started: () => {
+    return {
+      type: CROPPED_STARTED,
+    };
+  },
+  success: (response) => {
+    return {
+      type: CROPPED_SUCCESS,
+      cropImg: response.data,
+    };
+  },
+  failed: (error) => {
+    return {
+      type: CROPPED_FAILED,
+      errors: error,
+    };
+  },
+};
 export const addProductReducer = (state = initialState, action) => {
   let newState = state;
 
@@ -121,27 +162,49 @@ export const addProductReducer = (state = initialState, action) => {
       break;
     }
     case STORES_STARTED: {
-        newState = update.set(state, "list.loading", true);
-        newState = update.set(newState, "list.success", false);
-        newState = update.set(newState, "list.failed", false);
-        break;
-      }
-      case STORES_SUCCESS: {
-        newState = update.set(state, "list.loading", false);
-        newState = update.set(newState, "list.failed", false);
-        //newState = update.set(newState, "list.success", true);
-        newState = update.set(newState, "list.success", false);
-        newState = update.set(newState, "list.stores", action.payload);
-        break;
-      }
-      case STORES_FAILED: {
-        newState = update.set(state, "list.loading", false);
-        newState = update.set(newState, "list.success", false);
-        //newState = update.set(newState, "list.failed", true);
-        newState = update.set(newState, "list.failed", false);
-        newState = update.set(newState, "list.errors", action.errors);
-        break;
-      }
+      newState = update.set(state, "list.loading", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.failed", false);
+      break;
+    }
+    case STORES_SUCCESS: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.failed", false);
+      //newState = update.set(newState, "list.success", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.stores", action.payload);
+      break;
+    }
+    case STORES_FAILED: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.success", false);
+      //newState = update.set(newState, "list.failed", true);
+      newState = update.set(newState, "list.failed", false);
+      newState = update.set(newState, "list.errors", action.errors);
+      break;
+    }
+    case CROPPED_STARTED: {
+      newState = update.set(state, "list.loading", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.failed", false);
+      break;
+    }
+    case CROPPED_SUCCESS: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.failed", false);
+      //newState = update.set(newState, "list.success", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.cropImg", action.cropImg);
+      break;
+    }
+    case CROPPED_FAILED: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.success", false);
+      //newState = update.set(newState, "list.failed", true);
+      newState = update.set(newState, "list.failed", false);
+      newState = update.set(newState, "list.errors", action.errors);
+      break;
+    }
     default: {
       return newState;
     }
