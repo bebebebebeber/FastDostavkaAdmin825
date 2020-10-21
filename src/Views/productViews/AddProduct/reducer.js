@@ -3,13 +3,13 @@ import { push } from "connected-react-router";
 
 import update from "../../../helpers/update";
 
-export const PRODUCT_ADD_STARTED = "PRODUCT_ADD_STARTED";
-export const PRODUCT_ADD_SUCCESS = "PRODUCT_ADD_SUCCESS";
-export const PRODUCT_ADD_FAILED = "PRODUCT_ADD_FAILED";
+export const PRODUCT_ADD2_STARTED = "PRODUCT_ADD2_STARTED";
+export const PRODUCT_ADD2_SUCCESS = "PRODUCT_ADD2_SUCCESS";
+export const PRODUCT_ADD2_FAILED = "PRODUCT_ADD2_FAILED";
 
-export const STORES_STARTED = "STORES_STARTED";
-export const STORES_SUCCESS = "STORES_SUCCESS";
-export const STORES_FAILED = "STORES_FAILED";
+export const STORES2_STARTED = "STORES2_STARTED";
+export const STORES2_SUCCESS = "STORES2_SUCCESS";
+export const STORES2_FAILED = "STORES2_FAILED";
 
 export const CROPPED_STARTED = "CROPPED_STARTED";
 export const CROPPED_SUCCESS = "CROPPED_SUCCESS";
@@ -82,19 +82,19 @@ export const sendCroppedImage = (model) => {
 export const getStoresListActions = {
   started: () => {
     return {
-      type: STORES_STARTED,
+      type: STORES2_STARTED,
     };
   },
   success: (response) => {
     return {
-      type: STORES_SUCCESS,
+      type: STORES2_SUCCESS,
       payload: response.data,
     };
   },
 
   failed: (error) => {
     return {
-      type: STORES_FAILED,
+      type: STORES2_FAILED,
       errors: error,
     };
   },
@@ -102,18 +102,18 @@ export const getStoresListActions = {
 export const getListActions = {
   started: () => {
     return {
-      type: PRODUCT_ADD_STARTED,
+      type: PRODUCT_ADD2_STARTED,
     };
   },
   success: (response) => {
     return {
-      type: PRODUCT_ADD_SUCCESS,
+      type: PRODUCT_ADD2_SUCCESS,
       //response: response.data,
     };
   },
   failed: (error) => {
     return {
-      type: PRODUCT_ADD_FAILED,
+      type: PRODUCT_ADD2_FAILED,
       errors: error,
     };
   },
@@ -141,33 +141,33 @@ export const addProductReducer = (state = initialState, action) => {
   let newState = state;
 
   switch (action.type) {
-    case PRODUCT_ADD_STARTED: {
+    case PRODUCT_ADD2_STARTED: {
       newState = update.set(state, "list.loading", true);
       newState = update.set(newState, "list.success", false);
       newState = update.set(newState, "list.failed", false);
       break;
     }
-    case PRODUCT_ADD_SUCCESS: {
+    case PRODUCT_ADD2_SUCCESS: {
       newState = update.set(state, "list.loading", false);
       newState = update.set(newState, "list.failed", false);
       newState = update.set(newState, "list.success", true);
       //newState = update.set(newState, "list.response", action.response);
       break;
     }
-    case PRODUCT_ADD_FAILED: {
+    case PRODUCT_ADD2_FAILED: {
       newState = update.set(state, "list.loading", false);
       newState = update.set(newState, "list.success", false);
       newState = update.set(newState, "list.failed", true);
       newState = update.set(newState, "list.errors", action.errors);
       break;
     }
-    case STORES_STARTED: {
+    case STORES2_STARTED: {
       newState = update.set(state, "list.loading", true);
       newState = update.set(newState, "list.success", false);
       newState = update.set(newState, "list.failed", false);
       break;
     }
-    case STORES_SUCCESS: {
+    case STORES2_SUCCESS: {
       newState = update.set(state, "list.loading", false);
       newState = update.set(newState, "list.failed", false);
       //newState = update.set(newState, "list.success", true);
@@ -175,7 +175,7 @@ export const addProductReducer = (state = initialState, action) => {
       newState = update.set(newState, "list.stores", action.payload);
       break;
     }
-    case STORES_FAILED: {
+    case STORES2_FAILED: {
       newState = update.set(state, "list.loading", false);
       newState = update.set(newState, "list.success", false);
       //newState = update.set(newState, "list.failed", true);
