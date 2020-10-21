@@ -6,6 +6,7 @@ import createHistory from 'history/createHashHistory';
 ///reducers
 import {loginReducer} from '../Views/defaultViews/LoginPage/reducer.js';
 import {ordersReducer} from '../Views/moderatorViews/Home/reducer';
+import {addProductReducer} from '../Views/productViews/AddProduct/reducer.js';
 import {storesReducer} from '../Views/moderatorViews/Stores/reducer';
 
 // Create browser history to use in the Redux store
@@ -17,6 +18,7 @@ export default function configureStore(history, initialState) {
     login: loginReducer,
     orders:ordersReducer,
     stores:storesReducer,
+    addProduct:addProductReducer
   };
 
   const middleware = [
