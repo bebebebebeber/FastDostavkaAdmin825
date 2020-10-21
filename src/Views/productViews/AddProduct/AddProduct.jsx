@@ -21,7 +21,7 @@ import 'primereact/resources/themes/saga-green/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Loader from "../../../components/Loader";
-import CropperPage from '../../../components/Cropper/CropperPage';
+import CropperPage from '../../../components/cropper/CropperPage';
 
 class addProduct extends Component {
     state = {
