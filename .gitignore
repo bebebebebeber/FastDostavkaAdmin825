@@ -6,6 +6,10 @@
 # testing
 /coverage
 
+# VS
+.vs/
+/.vs
+
 # production
 /build
 
