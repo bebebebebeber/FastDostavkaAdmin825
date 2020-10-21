@@ -7,7 +7,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import Pagination from "@material-ui/lab/Pagination";
 import MessageIcon from "@material-ui/icons/Message";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
-import CropperPage from "../../../components/cropper/CropperPage";
+import CropperPage from "../../../components/Cropper/CropperPage";
 import {
   Grid,
   CircularProgress,
@@ -179,8 +179,9 @@ class Home extends React.Component {
             </div>
           </Grid>
           <Grid item xs={12} md={6}>
-            <div className="p-3">
-              {data.categories !== undefined ? (
+            <div className="p-3"> 
+            {data !== undefined ?
+              data.categories !== undefined ? (
                 <TextField
                   fullWidth
                   label="Категорія"
@@ -202,7 +203,8 @@ class Home extends React.Component {
                 </TextField>
               ) : (
                 ""
-              )}
+              )
+              :""}
             </div>
           </Grid>
           <Grid
