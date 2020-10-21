@@ -7,9 +7,9 @@ import { Card, CardBody, CardFooter } from "reactstrap";
 
 class CropperPage extends Component {
   state = {
-      src: "",
-      modal: false
-    }; 
+    src: "",
+    modal: false
+  }; 
 
   onChange = e => {
     e.preventDefault();
@@ -44,8 +44,7 @@ class CropperPage extends Component {
       src: "",
       modal: false
     });
-    let base=this.cropper.getCroppedCanvas().toDataURL();
-    this.props.getCroppedImage(base);
+    this.props.getCroppedImage(this.cropper.getCroppedCanvas().toDataURL());
   };
 
   optionCropImage = (e, option, value) => {
