@@ -5,6 +5,11 @@ export default {
         url: '/admin',
         icon: 'fa fa-home'
       },    
+      {
+        name: 'Магазини',
+        url: '/admin/stores',
+        icon: 'fa fa-home'
+      }, 
     //   {
     //     title: true,
     //     name: 'Розклад',
