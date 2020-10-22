@@ -22,6 +22,8 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Loader from "../../../components/Loader";
 import CropperPage from '../../../components/Cropper/CropperPage';
+import StoresService from '../../moderatorViews/Stores/StoresService';
+import { serverUrl } from '../../../config';
 
 class addProduct extends Component {
     state = {
@@ -42,6 +44,7 @@ class addProduct extends Component {
           },
           this.changeImage
         );
+        console.log(img)
       };
     
       changeImage = () => {
@@ -112,7 +115,7 @@ class addProduct extends Component {
       if (isValid) {  
         this.props.addProduct({
           name,
-          image,
+          image:this.state.croppedImage,
           description,
           price:parseFloat(price),
           storeId,
@@ -126,6 +129,7 @@ class addProduct extends Component {
     render() {
       //console.log("s ", this.state.success, " f ", this.state.failed);
       const { stores, loading } = this.props;
+      console.log("kk",stores);
       if (loading == false) {
         return (  
           <div>
@@ -150,6 +154,8 @@ class addProduct extends Component {
                     label="Outlined"
                     variant="outlined"
                     label="Price"
+                    type="number"
+                    InputProps={{ inputProps: { min: 1, max: 1000 } }}
                     name="price"
                     onChange={this.handleChange}
                   />
@@ -191,7 +197,7 @@ class addProduct extends Component {
                       {
                         stores.map(item => {
                           return (
-                            <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
+                            <MenuItem key={item.id} value={item.id}><img className="mr-2" style={{height:"15px"}} src={serverUrl+"UserImages/"+item.image}/>{item.name}</MenuItem>
                           )
                         })
                       }
