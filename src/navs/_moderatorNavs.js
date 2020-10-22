@@ -11,6 +11,11 @@ export default {
         icon: 'fa fa-home'
       }, 
       {
+        name: 'Перегляд продуктів',
+        url: '/admin/products',
+        icon: 'fa fa-home'
+      },
+      {
         name: 'Додати продукт',
         url: '/admin/add-prod',
         icon: 'fa fa-home'
